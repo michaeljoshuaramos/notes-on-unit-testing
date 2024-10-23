@@ -2,9 +2,10 @@
 
 **Unit Testing with Vitest and React Testing Library**
 
-1. [Testing Utility and Helper Functions](#)
+1. [1. Testing Utility and Helper Functions](#testing-utility-and-helper-functions)
+2. [2. Testing Components](#testing-components)
 
-## Testing Utility and Helper Functions
+## 1. Testing Utility and Helper Functions
 
 ```javascript
 // utils.js
@@ -74,9 +75,9 @@ describe("utils", () => {
 
 **[⬆ back to top](#table-of-contents)**
 
-## Testing Components
+## 2. Testing Components
 
-### Rendering and Querying Elements
+### 2.1 Rendering and Querying Elements
 
 ```javascript
 // Todo.jsx
@@ -131,7 +132,7 @@ describe("TodoItem", () => {
 });
 ```
 
-### Handling User Events
+### 2.2 Handling User Events
 
 ```javascript
 it("adds a new todo on button click", async () => {
@@ -145,7 +146,7 @@ it("adds a new todo on button click", async () => {
 
 **Note:** `screen.getByRole('button', { name: /add/i })`: This finds the button element by its role (button) and text (matching the word "Add", case-insensitive due to the /i flag).
 
-### Testing Props
+### 2.3 Testing Props
 
 ```javascript
 it("renders completed todo", () => {
@@ -155,7 +156,7 @@ it("renders completed todo", () => {
 });
 ```
 
-### Testing Conditional Rendering
+### 2.4 Testing Conditional Rendering
 
 ```javascript
 it("shows empty state when no todos", () => {
