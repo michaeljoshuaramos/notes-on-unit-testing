@@ -73,3 +73,87 @@ describe("utils", () => {
 - Use `toBeCloseTo` when comparing **floating-point numbers** to account for precision errors that occur due to how floating-point arithmetic works in JavaScript.
 
 **[⬆ back to top](#table-of-contents)**
+
+## Testing Components
+
+### Rendering and Querying Elements
+
+```javascript
+// Todo.jsx
+import { useState } from "react";
+
+const Todo = ({ addTodo }) => {
+  const [text, setText] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (text.trim()) {
+      addTodo(text);
+      setText("");
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        placeholder="Add Todo"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+      />
+      <button type="submit">Add</button>
+    </form>
+  );
+};
+
+export default Todo;
+```
+
+```javascript
+// Todo.test.js
+
+import { describe, expect, it } from "vitest";
+import { render, screen } from "@testing-library/react";
+import Todo from "./Todo";
+
+describe("Todo", () => {
+  it("renders Todo component", () => {
+    render(<Todo />);
+    expect(screen.getByText("Add Todo")).toBeInTheDocument();
+  });
+});
+```
+
+```javascript
+// TodoItem.test.js
+
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { describe, it, expect } from "vitest";
+import TodoItem from "./TodoItem"; // Example component
+
+describe("TodoItem", () => {
+  it("renders todo text", () => {
+    render(<TodoItem todo={{ text: "Learn React", isCompleted: false }} />);
+    expect(screen.getByText("Learn React")).toBeInTheDocument();
+  });
+
+  it("toggles completion state", async () => {
+    const user = userEvent.setup();
+    render(<TodoItem todo={{ text: "Learn React", isCompleted: false }} />);
+    const checkbox = screen.getByRole("checkbox");
+    await user.click(checkbox);
+    expect(checkbox).toBeChecked();
+  });
+});
+```
+
+### Key Points
+
+- **Keep tests focused:** Test one thing at a time (e.g., rendering, events, props).
+- **Use** `screen` for **queries:** It aligns with user-centric testing.
+- **Avoid testing implementation details:** Focus on behavior and what the user sees, not internal states.
+- **Use** `toBeInTheDocument`: Ensures the element exists in the DOM.
+- **Use** `userEvent` **for interactions:** Simulates how users interact with your UI (click, type, etc.).
+
+**[⬆ back to top](#table-of-contents)**
