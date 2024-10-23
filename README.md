@@ -2,9 +2,9 @@
 
 **Unit Testing with Vitest and React Testing Library**
 
-1. [Testing utility and helper functions](#)
+1. [Testing Utility and Helper Functions](#)
 
-## Testing utility and helper functions
+## Testing Utility and Helper Functions
 
 ```javascript
 // utils.js
@@ -30,6 +30,7 @@ describe("utils", () => {
       const result = range(1, 6);
       expect(result).toEqual([1, 2, 3, 4, 5]);
     });
+
     it("returns correct result from 41-45 range", () => {
       const result = range(41, 45);
       expect(result).toEqual([41, 42, 43, 44]);
@@ -41,23 +42,34 @@ describe("utils", () => {
       const result = sum(2, 4);
       expect(result).toEqual(6);
     });
+
+    it("adds floating-point numbers correctly", () => {
+      const result = sum(0.1, 0.2);
+      expect(result).toBeCloseTo(0.3);
+    });
   });
 });
 ```
 
 ```
- ✓ src/utils.test.js (3)
-   ✓ utils (3)
+ ✓ src/utils.test.js (4)
+   ✓ utils (4)
      ✓ range (2)
        ✓ returns correct result from 1-6 range
        ✓ returns correct result from 41-45 range
-     ✓ sum (1)
-       ✓ should add two numbers correctly
+     ✓ sum (2)
+       ✓ adds two numbers correctly
+       ✓ adds floating-point numbers correctly
 
  Test Files  1 passed (1)
-      Tests  3 passed (3)
-   Start at  17:04:11
-   Duration  101ms
+      Tests  4 passed (4)
+   Start at  17:52:51
+   Duration  115ms
 ```
+
+### Key Points
+
+- Use `toEqual` for strict equality checks when you expect the values to match exactly, such as integers, strings, arrays, or objects.
+- Use `toBeCloseTo` when comparing **floating-point numbers** to account for precision errors that occur due to how floating-point arithmetic works in JavaScript.
 
 **[⬆ back to top](#table-of-contents)**
