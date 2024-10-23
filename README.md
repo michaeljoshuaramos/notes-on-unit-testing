@@ -112,10 +112,6 @@ export default Todo;
 ```javascript
 // Todo.test.js
 
-import { describe, expect, it } from "vitest";
-import { render, screen } from "@testing-library/react";
-import Todo from "./Todo";
-
 describe("Todo", () => {
   it("renders Todo component", () => {
     render(<Todo />);
@@ -127,24 +123,44 @@ describe("Todo", () => {
 ```javascript
 // TodoItem.test.js
 
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { describe, it, expect } from "vitest";
-import TodoItem from "./TodoItem"; // Example component
-
 describe("TodoItem", () => {
   it("renders todo text", () => {
     render(<TodoItem todo={{ text: "Learn React", isCompleted: false }} />);
     expect(screen.getByText("Learn React")).toBeInTheDocument();
   });
+});
+```
 
-  it("toggles completion state", async () => {
-    const user = userEvent.setup();
-    render(<TodoItem todo={{ text: "Learn React", isCompleted: false }} />);
-    const checkbox = screen.getByRole("checkbox");
-    await user.click(checkbox);
-    expect(checkbox).toBeChecked();
-  });
+### Handling User Events
+
+```javascript
+it("adds a new todo on button click", async () => {
+  render(<TodoList />);
+  const user = userEvent.setup();
+  await user.type(screen.getByRole("textbox"), "New Todo");
+  await user.click(screen.getByRole("button", { name: /add/i }));
+  expect(screen.getByText("New Todo")).toBeInTheDocument();
+});
+```
+
+**Note:** `screen.getByRole('button', { name: /add/i })`: This finds the button element by its role (button) and text (matching the word "Add", case-insensitive due to the /i flag).
+
+### Testing Props
+
+```javascript
+it("renders completed todo", () => {
+  const todo = { text: "Learn Testing", isCompleted: true };
+  render(<TodoItem todo={todo} />);
+  expect(screen.getByText("Learn Testing")).toHaveClass("completed");
+});
+```
+
+### Testing Conditional Rendering
+
+```javascript
+it("shows empty state when no todos", () => {
+  render(<TodoList todos={[]} />);
+  expect(screen.getByText("No todos yet")).toBeInTheDocument();
 });
 ```
 
