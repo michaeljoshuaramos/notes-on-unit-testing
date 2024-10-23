@@ -45,4 +45,19 @@ describe("utils", () => {
 });
 ```
 
+```
+ ✓ src/utils.test.js (3)
+   ✓ utils (3)
+     ✓ range (2)
+       ✓ returns correct result from 1-6 range
+       ✓ returns correct result from 41-45 range
+     ✓ sum (1)
+       ✓ should add two numbers correctly
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  17:04:11
+   Duration  101ms
+```
+
 **[⬆ back to top](#table-of-contents)**
