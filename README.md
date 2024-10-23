@@ -2,10 +2,10 @@
 
 **Unit Testing with Vitest and React Testing Library**
 
-1. [1. Testing Utility and Helper Functions](#testing-utility-and-helper-functions)
-2. [2. Testing Components](#testing-components)
+1. [Testing Utility and Helper Functions](#testing-utility-and-helper-functions)
+2. [Testing Components](#testing-components)
 
-## 1. Testing Utility and Helper Functions
+## Testing Utility and Helper Functions
 
 ```javascript
 // utils.js
@@ -75,7 +75,7 @@ describe("utils", () => {
 
 **[⬆ back to top](#table-of-contents)**
 
-## 2. Testing Components
+## Testing Components
 
 ### 2.1 Rendering and Querying Elements
 
